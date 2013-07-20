@@ -95,7 +95,10 @@ speed :				time each slide is shown [integer, milliseconds, defaults to 3000]
 			// pause slide rotation on hover
 			if(config.hoverPause){ $cont.hover(
 				function(){ if(isPlaying()) pause('hover'); },
-				function(){ if(isPlaying()) play('hover'); }
+				function(){ 
+				    // if(isPlaying()) play('hover');
+				    timer = setInterval(function(){ play(); },config.speed);
+				}
 			);};
 			
 			// determine autoPlay
@@ -160,7 +163,7 @@ speed :				time each slide is shown [integer, milliseconds, defaults to 3000]
 			function play(src) {
 				if(!isBusy()){
 					counter++;
-					transitionTo(gallery,counter);
+				    transitionTo(gallery,counter);
 					if(src=='hover' || !isPlaying()) {
 						timer = setInterval(function(){ play(); },config.speed);
 					}
